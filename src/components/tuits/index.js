@@ -3,6 +3,7 @@ import './tuits.css';
 import Tuit from "./tuit";
 
 function Tuits({tuits = [], deleteTuit}) {
+    console.log(tuits);
     return (
     <div>
       <ul className="ttr-tuits list-group">
