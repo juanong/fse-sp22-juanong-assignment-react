@@ -30,8 +30,11 @@ describe('can create tuit with REST API', () => {
     test('can insert new tuits using REST API', async () => {
         const newUser = await createUser(testUser);
         const newTuit = await createTuit(newUser._id, testTuit);
-        expect(newTuit.tuit).toEqual(testTuit.tuit);
-        expect(newTuit.postedBy).toEqual(newUser._id);
+        // find the tuit to execute the populate
+        const fetchedNewTuit = await findTuitById(newTuit._id);
+        expect(fetchedNewTuit.tuit).toEqual(testTuit.tuit);
+        // Creating a tuit in postman populates the postedBy correctly, but is always null here
+        expect(fetchedNewTuit.postedBy._id).toEqual(newUser._id);
         await deleteTuit(newTuit._id);
     })
 });
@@ -83,9 +86,10 @@ describe('can retrieve a tuit by their primary key with REST API', () => {
         expect(newTuit.tuit).toEqual(testTuit.tuit);
         expect(newTuit.postedBy).toEqual(newUser._id);
 
+        // find the tuit to execute populate
         const retrievedTuit = await findTuitById(newTuit._id);
         expect(retrievedTuit.tuit).toEqual(testTuit.tuit);
-        expect(retrievedTuit.postedBy).toEqual(newUser._id);
+        expect(retrievedTuit.postedBy._id).toEqual(newUser._id);
 
         await deleteTuit(newTuit._id);
     })
@@ -99,7 +103,7 @@ describe('can retrieve all tuits with REST API', () => {
         email: "test@test.com"
     }
     beforeEach(() => {
-        return deleteUsersByUsername(testUser.username);
+        return deleteUsersByUsername(testUser.userncame);
     })
 
     afterEach(() => {
@@ -120,13 +124,13 @@ describe('can retrieve all tuits with REST API', () => {
 
         // Get the tuits that we inserted
         const insertedTuits = retrievedTuits.filter(tuit =>
-            tuit.postedBy === newUser._id
+            tuit.postedBy._id === newUser._id
         )
 
         insertedTuits.forEach(tuit => {
             const tuitContent = tuits.find(testTuit => testTuit === tuit.tuit);
             expect(tuit.tuit).toEqual(tuitContent);
-            expect(tuit.postedBy).toEqual(newUser._id);
+            expect(tuit.postedBy._id).toEqual(newUser._id);
         })
 
         // Delete all our inserted tuits

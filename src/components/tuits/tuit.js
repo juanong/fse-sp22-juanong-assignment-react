@@ -19,7 +19,7 @@ const Tuit = ({tuit, deleteTuit}) => {
           className="fs-5">
           {tuit.postedBy && tuit.postedBy.username}
           @{tuit.postedBy && tuit.postedBy.username} -
-          {tuit.published}</h2>
+          {tuit.postedOn}</h2>
         {tuit.tuit}
         {
           tuit.youtube &&
