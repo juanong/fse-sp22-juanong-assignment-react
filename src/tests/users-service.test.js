@@ -131,8 +131,6 @@ describe('findAllUsers',  () => {
         await deleteUsersByUsername(usernames[1]);
         await deleteUsersByUsername(usernames[2]);
       }
-      // usernames.map(async (username) =>
-      //     await deleteUsersByUsername(username)
   );
 
   test('can retrieve all users from REST API', async () => {

@@ -35,6 +35,7 @@ describe('can create tuit with REST API', () => {
         expect(fetchedNewTuit.tuit).toEqual(testTuit.tuit);
         // Creating a tuit in postman populates the postedBy correctly, but is always null here
         expect(fetchedNewTuit.postedBy._id).toEqual(newUser._id);
+        // delete the test tuit
         await deleteTuit(newTuit._id);
     })
 });
@@ -60,6 +61,7 @@ describe('can delete tuit with REST API', () => {
         const newTuit = await createTuit(newUser._id, testTuit);
         const deleteStatus = await deleteTuit(newTuit._id);
         expect(deleteStatus.deletedCount).toBeGreaterThanOrEqual(1);
+        // delete the test tuit
         await deleteTuit(newTuit._id);
     })
 });
@@ -90,7 +92,7 @@ describe('can retrieve a tuit by their primary key with REST API', () => {
         const retrievedTuit = await findTuitById(newTuit._id);
         expect(retrievedTuit.tuit).toEqual(testTuit.tuit);
         expect(retrievedTuit.postedBy._id).toEqual(newUser._id);
-
+        // delete the test tuit
         await deleteTuit(newTuit._id);
     })
 });
@@ -112,10 +114,6 @@ describe('can retrieve all tuits with REST API', () => {
 
     test('can find all tuits', async () => {
         const newUser = await createUser(testUser);
-        // Loop sometimes failing
-        // tuits.map(async (tuit) =>
-        //     await createTuit(newUser._id, {tuit: tuit})
-        // )
         await createTuit(newUser._id, {tuit: tuits[0]});
         await createTuit(newUser._id, {tuit: tuits[1]});
         await createTuit(newUser._id, {tuit: tuits[2]});
@@ -133,7 +131,7 @@ describe('can retrieve all tuits with REST API', () => {
             expect(tuit.postedBy._id).toEqual(newUser._id);
         })
 
-        // Delete all our inserted tuits
+        // Delete all the test tuits
         await deleteTuitsByAuthor(newUser._id);
     })
 });

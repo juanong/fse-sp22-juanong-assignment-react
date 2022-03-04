@@ -3,7 +3,6 @@ import {screen, render} from "@testing-library/react";
 import {HashRouter} from "react-router-dom";
 import {findAllTuits} from "../services/tuits-service";
 import axios from "axios";
-import Tuit from "../components/tuits/tuit";
 
 const MOCKED_USERS = [
     {username: "alice", password: "abcde", email: "alice@wonderland.com", _id: "123"},
