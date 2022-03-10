@@ -22,9 +22,7 @@ test('tuit list renders static tuit array', () => {
       </HashRouter>);
   MOCKED_TUITS.forEach(mockedTuit => {
     const tuitLinkElement = screen.getByText(mockedTuit.tuit);
-    // const usernameLinkElement = screen.getByText(mockedTuit.postedBy.username);
     expect(tuitLinkElement).toBeInTheDocument();
-    // expect(usernameLinkElement).toBeInTheDocument();
   })
 });
 
