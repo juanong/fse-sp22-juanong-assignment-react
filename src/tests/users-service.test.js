@@ -106,7 +106,6 @@ describe('findUserById',  () => {
 
 
 describe('findAllUsers',  () => {
-
   // sample users we'll insert to then retrieve
   const usernames = [
     "larry", "curley", "moe"
@@ -126,7 +125,6 @@ describe('findAllUsers',  () => {
 
   // clean up after ourselves
   afterAll( async () => {
-    // The loop was not always deleting each user properly
         await deleteUsersByUsername(usernames[0]);
         await deleteUsersByUsername(usernames[1]);
         await deleteUsersByUsername(usernames[2]);
