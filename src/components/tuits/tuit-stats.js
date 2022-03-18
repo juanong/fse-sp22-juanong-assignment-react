@@ -1,6 +1,8 @@
 import React from "react";
 
-const TuitStats = ({tuit, likeTuit = () => {}, dislikeTuit = () => {}, userLikedTuit}) => {
+const TuitStats = ({tuit, likeTuit = () => {},
+                       dislikeTuit = () => {},
+                       userLikedTuit, userDislikedTuit}) => {
     return (
         <div className="row mt-2">
             <div className="col">
@@ -27,11 +29,11 @@ const TuitStats = ({tuit, likeTuit = () => {}, dislikeTuit = () => {}, userLiked
             <div className="col">
                 <span onClick={() => dislikeTuit(tuit)}>
                     {
-                        tuit.stats && tuit.stats.dislikes > 0 &&
+                        tuit.stats && tuit.stats.dislikes > 0 && userDislikedTuit &&
                         <i className="fas fa-thumbs-down" style={{color: 'red'}}></i>
                     }
                     {
-                        tuit.stats && tuit.stats.dislikes <= 0 &&
+                        tuit.stats && !userDislikedTuit &&
                         <i className="fa-regular fa-thumbs-down"></i>
                     }
                     {tuit.stats && tuit.stats.dislikes}
