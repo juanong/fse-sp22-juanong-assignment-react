@@ -2,10 +2,15 @@ import React from "react";
 import './tuits.css';
 import Tuit from "./tuit";
 import * as likesService from '../../services/likes-service'
+import * as dislikesService from '../../services/dislikes-service'
 
 function Tuits({tuits = [], deleteTuit, refreshTuits}) {
     const likeTuit = (tuit) =>
         likesService.userTogglesTuitLikes("me", tuit._id)
+            .then(refreshTuits)
+            .catch(e => alert(e));
+    const dislikeTuit = (tuit) =>
+        dislikesService.userTogglesDislikeTuit("me", tuit._id)
             .then(refreshTuits)
             .catch(e => alert(e));
     return (
@@ -18,6 +23,7 @@ function Tuits({tuits = [], deleteTuit, refreshTuits}) {
                     deleteTuit={deleteTuit}
                     tuit={tuit}
                     likeTuit={likeTuit}
+                    dislikeTuit={dislikeTuit}
               />
             );
           })

@@ -1,9 +1,22 @@
-import React from "react";
+import {React, useEffect, useState} from "react";
 import TuitStats from "./tuit-stats";
 import TuitImage from "./tuit-image";
 import TuitVideo from "./tuit-video";
+import * as likesService from '../../services/likes-service'
 
-const Tuit = ({tuit, deleteTuit, likeTuit}) => {
+const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit}) => {
+    const [userLikedTuit, setUserLikedTuit] = useState(false);
+    useEffect(() => {
+        if (tuit) {
+            likesService.findUserLikesTuit("me", tuit._id)
+                .then(response => {
+                    if (response) {
+                        setUserLikedTuit(true);
+                    }
+                });
+        }
+    }, [])
+    console.log(userLikedTuit);
   return(
     <li className="p-2 ttr-tuit list-group-item d-flex rounded-0">
       <div className="pe-2">
@@ -28,7 +41,11 @@ const Tuit = ({tuit, deleteTuit, likeTuit}) => {
           tuit.image &&
           <TuitImage tuit={tuit}/>
         }
-        <TuitStats tuit={tuit} likeTuit={likeTuit}/>
+        <TuitStats tuit={tuit}
+                   likeTuit={likeTuit}
+                   dislikeTuit={dislikeTuit}
+                   userLikedTuit={userLikedTuit}
+        />
       </div>
     </li>
   );

@@ -11,13 +11,15 @@ const MyTuits = () => {
     const deleteTuit = (tid) =>
         service.deleteTuit(tid)
             .then(findMyTuits);
+    if (!tuits.length) {
+        return (
+            <h5>Looks like you haven't posted anything yet</h5>
+        )
+    }
     return(
-        <>
-            <h1>hello</h1>
-            <Tuits tuits={tuits}
-                   deleteTuit={deleteTuit}/>
-        </>
-
+        <Tuits tuits={tuits}
+               deleteTuit={deleteTuit}
+        />
     );
 };
 
