@@ -26,13 +26,25 @@ const Profile = () => {
           Logout
         </button>
           <br/>
-          <Link to="/profile/mylikes">
-              Likes
-          </Link>
+          <ul className="mt-4 nav nav-pills nav-fill">
+              <li className="nav-item">
+                  <Link to="/profile/mytuits" classname='nav-link active'>
+                      Tuits
+                  </Link>
+              </li>
+              <li className="nav-item">
+                  <Link to="/profile/mylikes" classname='nav-link active'>
+                      Likes
+                  </Link>
+              </li>
+              <li className="nav-item">
+                  <Link to="/profile/mydislikes" classname='nav-link active'>
+                      Dislikes
+                  </Link>
+              </li>
+          </ul>
           <br/>
-          <Link to="/profile/mytuits">
-              Tuits
-          </Link>
+
       </div>
   );
 };
