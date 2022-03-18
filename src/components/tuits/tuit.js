@@ -1,9 +1,33 @@
-import React from "react";
+import {React, useEffect, useState} from "react";
 import TuitStats from "./tuit-stats";
 import TuitImage from "./tuit-image";
 import TuitVideo from "./tuit-video";
+import * as likesService from '../../services/likes-service'
+import * as dislikesService from '../../services/dislikes-service'
 
-const Tuit = ({tuit, deleteTuit}) => {
+const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit}) => {
+    const [userLikedTuit, setUserLikedTuit] = useState(false);
+    const [userDislikedTuit, setUserDislikedTuit] = useState(false);
+    useEffect(() => {
+        if (tuit) {
+            likesService.findUserLikesTuit("me", tuit._id)
+                .then(response => {
+                    if (response) {
+                        setUserLikedTuit(true);
+                    }
+                });
+        }
+    }, [])
+    useEffect(() => {
+        if (tuit) {
+            dislikesService.findUserDislikesTuit("me", tuit._id)
+                .then(response => {
+                    if (response) {
+                        setUserDislikedTuit(true);
+                    }
+                });
+        }
+    }, [])
   return(
     <li className="p-2 ttr-tuit list-group-item d-flex rounded-0">
       <div className="pe-2">
@@ -18,8 +42,7 @@ const Tuit = ({tuit, deleteTuit}) => {
         <h2
           className="fs-5">
           {tuit.postedBy && tuit.postedBy.username}
-          @{tuit.postedBy && tuit.postedBy.username} -
-          {tuit.postedOn}</h2>
+          @{tuit.postedBy && tuit.postedBy.username}</h2>
         {tuit.tuit}
         {
           tuit.youtube &&
@@ -29,7 +52,12 @@ const Tuit = ({tuit, deleteTuit}) => {
           tuit.image &&
           <TuitImage tuit={tuit}/>
         }
-        <TuitStats tuit={tuit}/>
+        <TuitStats tuit={tuit}
+                   likeTuit={likeTuit}
+                   dislikeTuit={dislikeTuit}
+                   userLikedTuit={userLikedTuit}
+                   userDislikedTuit={userDislikedTuit}
+        />
       </div>
     </li>
   );
