@@ -28,7 +28,6 @@ const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit}) => {
                 });
         }
     }, [])
-    console.log(userDislikedTuit);
   return(
     <li className="p-2 ttr-tuit list-group-item d-flex rounded-0">
       <div className="pe-2">

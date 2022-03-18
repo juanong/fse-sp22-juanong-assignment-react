@@ -30,6 +30,7 @@ const Home = () => {
   const deleteTuit = (tid) =>
       service.deleteTuit(tid)
           .then(findTuits)
+  // refresh tuits needs to be tweaked
   return(
     <div className="ttr-home">
       <div className="border border-bottom-0">
@@ -68,7 +69,7 @@ const Home = () => {
           </div>
         }
       </div>
-      <Tuits tuits={tuits} deleteTuit={deleteTuit}/>
+      <Tuits tuits={tuits} deleteTuit={deleteTuit} refreshTuits={findTuits}/>
     </div>
   );
 };

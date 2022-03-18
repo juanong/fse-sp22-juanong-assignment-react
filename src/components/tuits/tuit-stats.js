@@ -1,8 +1,17 @@
-import React from "react";
+import {React, useState, useEffect} from "react";
 
-const TuitStats = ({tuit, likeTuit = () => {},
+const TuitStats = ({tuit,
+                       likeTuit = () => {},
                        dislikeTuit = () => {},
-                       userLikedTuit, userDislikedTuit}) => {
+                       userLikedTuit, userDislikedTuit}) =>
+{
+    // Use local state variables to update like/dislike icons and stats instantly
+    const [liked, setLiked] = useState(userLikedTuit);
+    const [disliked, setDisliked] = useState(userDislikedTuit)
+    useEffect(() => {
+        setLiked(userLikedTuit);
+        setDisliked(userDislikedTuit);
+    }, [userLikedTuit, userDislikedTuit])
     return (
         <div className="row mt-2">
             <div className="col">
@@ -14,26 +23,36 @@ const TuitStats = ({tuit, likeTuit = () => {},
                 {tuit.stats && tuit.stats.retuits}
             </div>
             <div className="col">
-                <span onClick={() => likeTuit(tuit)}>
+                <span onClick={
+                    () => {
+                        likeTuit(tuit)
+                        setLiked(!liked)
+                        setDisliked(false)
+                    }}>
                     {
-                        tuit.stats && tuit.stats.likes > 0 && userLikedTuit &&
+                        tuit.stats && tuit.stats.likes > 0 && liked &&
                         <i className="fas fa-thumbs-up" style={{color: 'red'}}></i>
                     }
                     {
-                        tuit.stats && !userLikedTuit &&
+                        tuit.stats && !liked &&
                         <i className="far fa-thumbs-up"></i>
                     }
                     {tuit.stats && tuit.stats.likes}
                 </span>
             </div>
             <div className="col">
-                <span onClick={() => dislikeTuit(tuit)}>
+                <span onClick={
+                    () => {
+                        dislikeTuit(tuit)
+                        setDisliked(!disliked)
+                        setLiked(false)
+                    }}>
                     {
-                        tuit.stats && tuit.stats.dislikes > 0 && userDislikedTuit &&
+                        tuit.stats && tuit.stats.dislikes > 0 && disliked &&
                         <i className="fas fa-thumbs-down" style={{color: 'red'}}></i>
                     }
                     {
-                        tuit.stats && !userDislikedTuit &&
+                        tuit.stats && !disliked &&
                         <i className="fa-regular fa-thumbs-down"></i>
                     }
                     {tuit.stats && tuit.stats.dislikes}
