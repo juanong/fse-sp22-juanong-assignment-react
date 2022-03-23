@@ -2,9 +2,7 @@ import axios from "axios";
 
 // const BASE_URL = process.env.REACT_APP_BASE_URL;
 const BASE_URL = "https://fse-sp22-juanong-a4.herokuapp.com"
-// const TUITS_API = "http://localhost:4000/api/tuits";
 const TUITS_API = `${BASE_URL}/api/tuits`
-// const USERS_API = "http://localhost:4000/api/users";
 const USERS_API = `${BASE_URL}/api/users`
 
 const api = axios.create({
