@@ -1,5 +1,4 @@
 import axios from "axios";
-// const BASE_URL = "https://fse-sp22-assignment-node.herokuapp.com/api";
 const BASE_URL = "https://fse-sp22-juanong-a4.herokuapp.com/api"
 
 const LOGIN_API = `${BASE_URL}/login`;
