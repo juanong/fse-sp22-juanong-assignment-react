@@ -8,6 +8,7 @@ import * as dislikesService from '../../services/dislikes-service'
 const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit}) => {
     const [userLikedTuit, setUserLikedTuit] = useState(false);
     const [userDislikedTuit, setUserDislikedTuit] = useState(false);
+    const usersWithPictures = ['alice', 'bob', 'chaplin', 'charlie', 'nasa', 'spacex'];
     useEffect(() => {
         if (tuit) {
             likesService.findUserLikesTuit("me", tuit._id)
@@ -32,9 +33,12 @@ const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit}) => {
     <li className="p-2 ttr-tuit list-group-item d-flex rounded-0">
       <div className="pe-2">
         {
-          tuit.postedBy &&
+          tuit.postedBy && usersWithPictures.includes(tuit.postedBy.username) ?
           <img src={`../images/${tuit.postedBy.username}.jpg`}
                className="ttr-tuit-avatar-logo rounded-circle"/>
+               :
+              <img src={`../images/react.png`}
+                   className="ttr-tuit-avatar-logo rounded-circle"/>
         }
       </div>
       <div className="w-100">
