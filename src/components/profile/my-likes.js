@@ -16,6 +16,7 @@ const MyLikes = () => {
             <Link to="/profile" classname='nav-link active'>
                 Back to profile
             </Link>
+            <br/>
             <Tuits tuits={likedTuits}
                    refreshTuits={findTuitsILike}/>
         </div>

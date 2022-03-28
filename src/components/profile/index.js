@@ -22,7 +22,7 @@ const Profile = () => {
       <div>
         <h4>{profile.username}</h4>
         <h6>@{profile.username}</h6>
-        <button onClick={logout}>
+        <button type="button" class="btn btn-primary" onClick={logout}>
           Logout
         </button>
           <br/>

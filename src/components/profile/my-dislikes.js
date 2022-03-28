@@ -16,6 +16,7 @@ const MyDislikes = () => {
             <Link to="/profile" classname='nav-link active'>
                 Back to profile
             </Link>
+            <br/>
             <Tuits tuits={dislikedTuits} refreshTuits={findTuitsIDislike}/>
         </div>
     )

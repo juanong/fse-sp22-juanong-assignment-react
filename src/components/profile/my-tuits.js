@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import * as service from "../../services/tuits-service";
 import Tuits from "../tuits";
+import {Link} from "react-router-dom";
 
 const MyTuits = () => {
     const [tuits, setTuits] = useState([]);
@@ -17,9 +18,16 @@ const MyTuits = () => {
         )
     }
     return(
-        <Tuits tuits={tuits}
-               deleteTuit={deleteTuit}
-        />
+        <div>
+            <h3>My Tuits</h3>
+            <Link to="/profile" classname='nav-link active'>
+                Back to profile
+            </Link>
+            <br/>
+            <Tuits tuits={tuits}
+                   deleteTuit={deleteTuit}
+            />
+        </div>
     );
 };
 
