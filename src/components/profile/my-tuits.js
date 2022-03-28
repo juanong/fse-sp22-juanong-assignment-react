@@ -14,7 +14,12 @@ const MyTuits = () => {
             .then(findMyTuits);
     if (!tuits.length) {
         return (
-            <h5>Looks like you haven't posted anything yet</h5>
+            <div>
+                <h5>Looks like you haven't posted anything yet</h5>
+                <Link to="/profile" classname='nav-link active'>
+                    Back to profile
+                </Link>
+            </div>
         )
     }
     return(
