@@ -10,9 +10,10 @@ const MyDislikes = () => {
     useEffect(findTuitsIDislike, []);
 
     return (
-        <div>
+        <>
+            <h3>My Dislikes</h3>
             <Tuits tuits={dislikedTuits} refreshTuits={findTuitsIDislike}/>
-        </div>
+        </>
     )
 }
 
